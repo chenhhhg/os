@@ -5,6 +5,8 @@ import os.system.SystemTimer;
 
 import java.util.*;
 
+import static os.constant.CPUConstant.CLOCK_PER_TICK;
+
 public class MLFQScheduler implements Scheduler {
     // 队列配置：优先级、时间片、是否抢占
     public record QueueConfig(int priority, int quantum, boolean preemptive) {}
@@ -50,7 +52,7 @@ public class MLFQScheduler implements Scheduler {
         if (currentProcess == null) return true;
 
         // 执行时间单元
-        currentProcess.pcb.execute(1);
+        currentProcess.pcb.execute(CLOCK_PER_TICK);
         currentProcess.remainingQuantum--;
 
         // 检查进程完成

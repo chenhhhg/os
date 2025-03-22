@@ -1,18 +1,20 @@
 package os;
 
-import os.process.PCB;
-import os.process.MLFQScheduler;
-import os.process.Scheduler;
-import os.process.Simulator;
+import os.process.*;
 
-import java.util.Arrays;
 import java.util.List;
 
 public class Main {
 
-    public static boolean debug = false;
+    public static boolean debug = true;
 
     public static void main(String[] args) {
+        PCB process = ProcessController.createProcess(0, 0, "script.txt");
+        Scheduler scheduler = new RoundRobinScheduler(2);
+
+        Simulator simulator = new Simulator(scheduler);
+
+        simulator.simulate(List.of(process));
 
     }
 

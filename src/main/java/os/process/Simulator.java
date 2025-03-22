@@ -49,10 +49,10 @@ public class Simulator {
             queueInfo = String.valueOf(((RoundRobinScheduler)scheduler).getReadyQueueSize());
         }
 
-        System.out.printf("[Tick %d] Running: %s Remaining: %s | Queues: %s%n",
+        System.out.printf("[Tick %d] Running: %s StillNeed: %s | Queues: %s%n",
                 timer.getTicks(),
                 running != null ? "PID-" + running.getPid() : "None",
-                running != null ? "Remaining-" + running.getRemainingTime() : "None",
+                running != null ? running.getRemainingTime() : "None",
                 queueInfo);
     }
 
