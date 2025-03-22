@@ -5,6 +5,8 @@ import os.system.SystemTimer;
 import java.util.LinkedList;
 import java.util.Queue;
 
+import static os.constant.CPUConstant.CLOCK_PER_TICK;
+
 public class RoundRobinScheduler implements Scheduler {
     private final Queue<PCB> readyQueue = new LinkedList<>();
     private PCB currentProcess = null;
@@ -20,7 +22,9 @@ public class RoundRobinScheduler implements Scheduler {
     public boolean onTick(SystemTimer timer) {
         if (currentProcess == null) return true;
         // 执行一个时间单元
-        currentProcess.execute(1);
+
+        currentProcess.execute(CLOCK_PER_TICK);
+        //减去实际执行时间
         remainingQuantum--;
 
         // 检查进程完成
