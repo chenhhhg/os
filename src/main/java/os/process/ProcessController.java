@@ -20,7 +20,9 @@ public class ProcessController {
     private static List<String[]> readScript(String filename) {
         try (InputStream stream = Main.class.getClassLoader().getResourceAsStream(filename)) {
             String s = new String(stream.readAllBytes(), Charset.defaultCharset());
-            return Arrays.stream(s.split("\r\n")).map(str -> str.split(",")).collect(Collectors.toList());
+            return Arrays.stream(s.split("\r*\n"))
+                    .map(str -> str.split("//")[0].replaceAll(" ",""))
+                    .map(str -> str.split(",")).collect(Collectors.toList());
         } catch (IOException e) {
             System.err.println("Error reading script file: " + e.getMessage());
             return Collections.emptyList();
