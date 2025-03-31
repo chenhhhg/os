@@ -182,12 +182,12 @@ public class CPU {
                 registers[1] = fileSystem.createFile(path, FileTreeNode.FileType.FILE, name) ? 1 : 0;
                 break;
             case 10:
-                Kernel.handleMemoryAccess(
-                        memory.getOrDefault(1024, 0),
+                System.out.println(List.of(
+                        memory.getOrDefault(24, 0),
                         memory.getOrDefault(2025, 0),
                         memory.getOrDefault(3026, 0),
                         memory.getOrDefault(4027, 0)
-                );
+                ));
                 break;
             default:
                 System.out.println("Unsupported syscall: " + callNumber);
