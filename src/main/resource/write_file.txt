@@ -1,0 +1,18 @@
+mov,R5,10
+mov,R6,1024
+mov,*R6,R5 //write 10~1 into 1024~1064
+add,R6,R6,4
+add,R5,R5,-1
+bnez,R5,-4
+mov,*2000,home
+mov,*2010,file
+mov,R2,2000 //parent path
+mov,R3,2010 //file name
+syscall,9 //create file
+syscall,3 //open file
+mov,R2,R1
+mov,R3,1024 //begin
+mov,R4,R6 //end
+syscall,6 //write file
+syscall,4 //close file
+exit

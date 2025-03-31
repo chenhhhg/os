@@ -58,7 +58,7 @@ public class PCB {
 
     // 检查是否完成
     public boolean isCompleted() {
-        return executedTime >= requiredBurstTime;
+        return instructions.size() == CPU.getCPU().getPc();
     }
 
     public void updateRegisters(int[] registers) {
@@ -72,7 +72,7 @@ public class PCB {
     public ProcessState getState() { return state; }
     public void setState(ProcessState s) { state = s; }
     public int getRemainingTime() {
-        return requiredBurstTime - executedTime;
+        return instructions.size() - CPU.getCPU().getPc();
     }
 
     public int getPriority() {
