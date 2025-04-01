@@ -1,6 +1,7 @@
 package os.cpu;
 
 import os.Main;
+import os.constant.CPUConstant;
 import os.filesystem.FileDescriptor;
 import os.filesystem.FileSystem;
 import os.filesystem.FileTreeNode;
@@ -53,6 +54,11 @@ public class CPU {
         String[] parts = instructions.get(pc);
         if (Main.debug) {
             System.out.println("Running instruction: " + Arrays.toString(parts));
+            try {
+                Thread.sleep(2500/ CPUConstant.CLOCK_PER_TICK);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
         switch (parts[0].toLowerCase()) {
             case "mov":
