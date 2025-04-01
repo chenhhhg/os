@@ -1,6 +1,7 @@
 package os.cpu;
 
 import os.Main;
+import os.constant.CPUConstant;
 import os.filesystem.FileDescriptor;
 import os.filesystem.FileSystem;
 import os.filesystem.FileTreeNode;
@@ -53,6 +54,11 @@ public class CPU {
         String[] parts = instructions.get(pc);
         if (Main.debug) {
             System.out.println("Running instruction: " + Arrays.toString(parts));
+            try {
+                Thread.sleep(2500/ CPUConstant.CLOCK_PER_TICK);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
         switch (parts[0].toLowerCase()) {
             case "mov":
@@ -182,12 +188,12 @@ public class CPU {
                 registers[1] = fileSystem.createFile(path, FileTreeNode.FileType.FILE, name) ? 1 : 0;
                 break;
             case 10:
-                Kernel.handleMemoryAccess(
-                        memory.getOrDefault(1024, 0),
+                System.out.println(List.of(
+                        memory.getOrDefault(24, 0),
                         memory.getOrDefault(2025, 0),
                         memory.getOrDefault(3026, 0),
                         memory.getOrDefault(4027, 0)
-                );
+                ));
                 break;
             default:
                 System.out.println("Unsupported syscall: " + callNumber);
