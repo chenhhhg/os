@@ -53,4 +53,8 @@ public class PriorityScheduler implements Scheduler{
             currentProcess.setState(ProcessState.RUNNING);
         }
     }
+
+    public int getQueueSize() {
+        return queue.size();
+    }
 }

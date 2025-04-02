@@ -48,8 +48,10 @@ public class Simulator {
         if (scheduler instanceof RoundRobinScheduler){
             queueInfo = String.valueOf(((RoundRobinScheduler)scheduler).getReadyQueueSize());
         }
-
-        System.out.printf("[Tick %d] Running: %s StillNeed: %s | Queues: %s%n",
+        if (scheduler instanceof PriorityScheduler) {
+            queueInfo = String.valueOf(((PriorityScheduler) scheduler).getQueueSize());
+        }
+        System.out.printf("[Tick %d] Running: %s StillNeed: %s | Ready Queues: %s%n",
                 timer.getTicks(),
                 running != null ? "PID-" + running.getPid() : "None",
                 running != null ? running.getRemainingTime() : "None",
